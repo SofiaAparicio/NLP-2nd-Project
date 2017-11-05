@@ -10,27 +10,37 @@ import string
 ################################################
 #                 functions                    #
 ################################################
-def run():
-    with codecs.open("virVerVir-1.final", "r", encoding='utf-8') as file:
-        raw = (file.read())#.split('\n')#.decode('utf-8')
-    file.close()
 
+def unigramsGenerator(verb, raw):
+    unigrams_dict = {}
     tokens = tokenize.word_tokenize(raw, language = "portuguese")
-    #see unigrams
     punctuations = list(string.punctuation) #+ list(string.digits)
-
     tokens = [token.lower() for token in tokens if token not in punctuations ] #if token not in punctuations
-    unigrams = [(item, tokens.count(item)) for item in sorted(set(tokens))]
+    unigrams = [[item, tokens.count(item)] for item in sorted(set(tokens))]
 
-    f = open('unigramasVer.txt', 'w')
+    f = open('unigramas' + verb + '.txt', 'w')
     for un in unigrams:
-        f.write( (un[0]).encode('UTF-8') + "\t" + str(un[1]) + "\n" ) #+ "\t" + str(un[1])
+        unigrams_dict.update({un[0]:un[1]})
+        f.write( (un[0]).encode('UTF-8') + "\t" + str(un[1]) + "\n" )
     f.close()
-    print len(unigrams)
 
+    return unigrams_dict
 
-    #see bigrams
+def unigramsSmoother(verb, unigrams):
+    unigrams_smoothed = unigrams
+    for un in unigrams_smoothed:
+        un[1] += len(unigrams_smoothed)
+
+    f = open('unigramas' + verb + 'Smoothed.txt', 'w')
+    for un in unigrams_smoothed:
+        f.write( (un[0]).encode('UTF-8') + "\t" + str(un[1]) + "\n" )
+    f.close()
+
+    return unigrams_smoothed
+
+def bigramsGenerator(verb,raw):
     sent = tokenize.sent_tokenize(raw, language = "portuguese")
+    punctuations = list(string.punctuation) #+ list(string.digits)
     new_bigrams = []
     for line in sent:
         tokens = tokenize.word_tokenize(line, language = "portuguese")
@@ -40,24 +50,42 @@ def run():
         new_bigrams += list(bigrams(tokenLine))
 
 
-    ordBigrams = [(item, new_bigrams.count(item)) for item in sorted(set(new_bigrams))]
+    ordBigrams = [[item, new_bigrams.count(item)] for item in sorted(set(new_bigrams))]
 
-    f = open('bigramasVer.txt', 'w')
-    for un in ordBigrams:
-        f.write( (un[0][0]).encode('UTF-8') + " " + (un[0][1]).encode('UTF-8') + "\t" + str(un[1]) + "\n" ) #+ "\t" + str(un[1])
+    f = open('bigramas' + verb + '.txt', 'w')
+    for bi in ordBigrams:
+        f.write( (bi[0][0]).encode('UTF-8') + " " + (bi[0][1]).encode('UTF-8') + "\t" + str(bi[1]) + "\n" )
     f.close()
 
+    return ordBigrams
 
-    # #bigrams mal
-    # tokens = tokenize.word_tokenize(raw, language = "portuguese")
-    #
-    # bi = list(set(bigrams(tokens)))
-    # print bi
-    # print len(bi)
+def bigramsSmoother(verb, bigrams):
+    bigrams_smoothed = bigrams
+    for bi in bigrams_smoothed:
+        bi[1] += 1
+
+    f = open('bigramas' + verb + 'Smoothed.txt', 'w')
+    for bi in bigrams_smoothed:
+        f.write( (bi[0][0]).encode('UTF-8') + " " + (bi[0][1]).encode('UTF-8') + "\t" + str(bi[1]) + "\n" )
+    f.close()
+
+    return bigrams_smoothed
+
+def main(filename, verb):
+    with codecs.open(filename, "r", encoding='utf-8') as file:
+        raw = (file.read())#.split('\n')#.decode('utf-8')
+    file.close()
+
+    unigrams = unigramsGenerator(verb, raw)
+    unigrams_smoothed = unigramsSmoother(verb, unigrams)
+
+    bigrams = bigramsGenerator(verb, raw)
+    bigrams_smoothed = bigramsSmoother(verb, bigrams)
 
 ################################################
 #                     run                      #
 ################################################
 
 if __name__ == '__main__':
-    run()
+    main("virVerVir-1.final", "Vir")
+    main("foraIrSer-2.final", "Fora")
