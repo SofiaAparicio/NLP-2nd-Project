@@ -17,7 +17,7 @@ def unigramsGenerator(verb, raw):
     tokens = [token.lower() for token in tokens if token not in punctuations ] #if token not in punctuations
     unigrams = [[item, tokens.count(item)] for item in sorted(set(tokens))]
 
-    f = open('unigramas' + verb + '.txt', 'w')
+    f = open(verb + 'Unigramas.txt', 'w')
     for un in unigrams:
         f.write( (un[0]).encode('UTF-8') + "\t" + str(un[1]) + "\n" )
     f.close()
@@ -36,7 +36,7 @@ def bigramsGenerator(verb, raw):
 
     ordBigrams = [[item, new_bigrams.count(item)] for item in sorted(set(new_bigrams))]
 
-    f = open('bigramas' + verb + '.txt', 'w')
+    f = open(verb + 'Bigramas.txt', 'w')
     for bi in ordBigrams:
         f.write((bi[0][0]).encode('UTF-8') + " " + (bi[0][1]).encode('UTF-8') + "\t" + str(bi[1]) + "\n")
     f.close()
@@ -54,5 +54,5 @@ def main(filename, verb):
 ################################################
 
 if __name__ == '__main__':
-    main("virVerVir-1.final", "Vir")
-    main("foraIrSer-2.final", "Fora")
+    main("virVerVir-1.final", "vir")
+    main("foraIrSer-2.final", "fora")

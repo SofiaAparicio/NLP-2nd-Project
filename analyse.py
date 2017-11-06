@@ -60,10 +60,6 @@ def analyseSentence(sent, unigrams_dict, bigrams_dict, ambiguity, sentences, smo
         else:
             bigrams_values.append(0)
 
-    for i in bigrams_values:
-        print i
-
-
     numerator_1_1 = bigrams_values[0] + smoothing
     denominator_1_1 = unigrams_dict[words[index_ambiguity-1]] + (smoothing * len(unigrams_dict))
 
@@ -117,5 +113,6 @@ if __name__ == '__main__':
     sentences = readSentences(sentences_file)
 
     for sent in sentences:
+        print "Sentence nr." + str(sentences.index(sent) + 1 )
         result = analyseSentence(sent, unigrams_dict, bigrams_dict, ambiguity, sentences, smoothing)
-        print str(sentences.index(sent) + 1 ) + " Frase " + str(result)
+        print "Result: " + str(result)

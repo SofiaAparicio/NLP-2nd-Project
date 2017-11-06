@@ -1,0 +1,20 @@
+ - sh run.sh para correr tudo!
+ - sh clean.sh para limpar ficheiros gerados
+ - optamos por quando as probabilidades são iguais, optamos pelo lema com mais ocorrencias (maior unigrama)
+ - optamos por (Não) retirar a pontuação de forma a optimizar a análise
+ - relativamente ao nome do ficheiro .out e .final, ficou como pedido no exercicio
+ - não usamos <s> </s> pois não existiam na DEMO mas corremos bigramas para cada frase.
+ - optamos pelos ficheiros txt em deterimento dos arpa
+ - Laplace Smoothing por ser o mais fácil de aplicar
+ - sendo probabilidade com bigramas apenas calculamos os valores da probabilidade dos bigramas da palavra da ambiguidade com a palavra anterior e com a palavra depois (tudo o resto seria igual para ambos os casos)
+ - Apenas fazemos alisamento quando estamos a calcular estas mesmas probabilidades
+ - 2 ficheiros python, primeiro responsável por criar os bigramas e unigramas enqaunto o outro serve para ler os ficheiros pedidos e indicar qual o lema mais provavel para cada uma das frases
+ - ao correr o analyse.py para alem dos ficheiro pedidos como input, podemos ou não, receber a string "use-smoothing" de forma a aplicar o Laplace smoothing no cálculo das probabilidades
+ - As frases foram escolhidas de forma a conter casos como:
+	- terminar com o lema.
+	- começar com o lema.
+	- lema junto de uma palavra nao pertencente ao corpus
+	- lema garantidamente certo para primeira opção
+	- lema garantidamente certo para a outra opção
+ - o que fazer caso uma palavra não pertença ao corpus?
+ - questões feitas ao professor....

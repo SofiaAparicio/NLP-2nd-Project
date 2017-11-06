@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm *.final
-rm unigramasVir.txt unigramasFora.txt bigramasVir.txt bigramasFora.txt
+rm virUnigramas.txt foraUnigramas.txt virBigramas.txt foraBigramas.txt virResultado.txt foraResultado.txt

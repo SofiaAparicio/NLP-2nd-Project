@@ -5,7 +5,6 @@
 #	$ ./run.sh
 
 clear
-sh clean.sh
 
 echo "======== PROCESSING virVerVir-1.final ========="
 grep '^ver\s' virVerVir-1.out | sed 's/vir/ver/g'  | sed 's/^ver\s*//' | sed '/\<ver\>.*\<ver\>/d' > virVerVir-1.final
@@ -19,11 +18,11 @@ echo "======= GENERATING UNIGRAMS AND BIGRAMS ======="
 python unigramsAndBigrams.py
 
 echo "============ EVALUATING SENTENCES ============="
-echo "Analysing vir without smoothing"
-python analyse.py unigramasVir.txt bigramasVir.txt virParametrizacao.txt frasesVir.txt
-echo "Analysing vir with smoothing"
-python analyse.py unigramasVir.txt bigramasVir.txt virParametrizacao.txt frasesVir.txt use-smoothing
-echo "Analysing fora without smoothing"
-python analyse.py unigramasFora.txt bigramasFora.txt foraParametrizacao.txt frasesFora.txt
-echo "Analysing fora with smoothing"
-python analyse.py unigramasFora.txt bigramasFora.txt foraParametrizacao.txt frasesFora.txt use-smoothing
+echo "Analysing vir without smoothing" > virResultado.txt
+python analyse.py virUnigramas.txt virBigramas.txt virParametrizacao.txt virFrases.txt >> virResultado.txt
+echo "Analysing vir with Laplace smoothing" >> virResultado.txt
+python analyse.py virUnigramas.txt virBigramas.txt virParametrizacao.txt virFrases.txt use-smoothing >> virResultado.txt
+echo "Analysing fora without smoothing" > foraResultado.txt
+python analyse.py foraUnigramas.txt foraBigramas.txt foraParametrizacao.txt foraFrases.txt >> foraResultado.txt
+echo "Analysing fora with Laplace smoothing" >> foraResultado.txt
+python analyse.py foraUnigramas.txt foraBigramas.txt foraParametrizacao.txt foraFrases.txt use-smoothing >> foraResultado.txt
