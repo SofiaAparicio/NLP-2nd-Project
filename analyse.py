@@ -1,8 +1,16 @@
 #!/usr/bin/python
+################################################
+#                   imports                    #
+################################################
 
 from nltk import tokenize
 import sys
 import codecs
+
+
+################################################
+#                 functions                    #
+################################################
 
 def createUnigrams(unigrams_file):
     unigrams_dict = {}
@@ -86,6 +94,10 @@ def analyseSentence(sent, unigrams_dict, bigrams_dict, ambiguity, sentences, smo
         return ambiguity[1]
     else:
         return ambiguity[2]
+
+################################################
+#                     run                      #
+################################################
 
 if __name__ == '__main__':
     smoothing = 0
