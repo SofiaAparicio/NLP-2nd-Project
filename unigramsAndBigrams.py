@@ -13,8 +13,7 @@ import string
 
 def unigramsGenerator(verb, raw):
     tokens = tokenize.word_tokenize(raw, language = "portuguese")
-    punctuations = list(string.punctuation) #+ list(string.digits)
-    tokens = [token.lower() for token in tokens if token not in punctuations ] #if token not in punctuations
+    tokens = [token.lower() for token in tokens] #if token not in punctuations
     unigrams = [[item, tokens.count(item)] for item in sorted(set(tokens))]
 
     f = open(verb + 'Unigramas.txt', 'w')
@@ -24,12 +23,11 @@ def unigramsGenerator(verb, raw):
 
 def bigramsGenerator(verb, raw):
     sent = tokenize.sent_tokenize(raw, language = "portuguese")
-    punctuations = list(string.punctuation) #+ list(string.digits)
     new_bigrams = []
 
     for line in sent:
         tokens = tokenize.word_tokenize(line, language = "portuguese")
-        tokenLine = [token.lower() for token in tokens if token not in punctuations ] #if token not in punctuations
+        tokenLine = [token.lower() for token in tokens ] #if token not in punctuations
 
         # bgs = nltk.bigrams(tokenLine)
         new_bigrams += list(bigrams(tokenLine))
@@ -54,5 +52,5 @@ def main(filename, verb):
 ################################################
 
 if __name__ == '__main__':
-    main("virVerVir-1.final", "vir")
-    main("foraIrSer-2.final", "fora")
+    main("virAnotado.final", "vir")
+    main("foraAnotado.final", "fora")

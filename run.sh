@@ -7,12 +7,16 @@
 clear
 
 echo "======== PROCESSING virVerVir-1.final ========="
-grep '^ver\s' virVerVir-1.out | sed 's/vir/ver/g'  | sed 's/^ver\s*//' | sed '/\<ver\>.*\<ver\>/d' > virVerVir-1.final
-grep '^vir\s' virVerVir-1.out                      | sed 's/^vir\s*//' | sed '/\<vir\>.*\<vir\>/d' >> virVerVir-1.final
+grep '^ver\s' virAnotado.out | sed 's/vir/ver/g'  | sed 's/^ver\s*//' | sed '/\<ver\>.*\<ver\>/d' > virAnotado.final
+grep '^vir\s' virAnotado.out                      | sed 's/^vir\s*//' | sed '/\<vir\>.*\<vir\>/d' >> virAnotado.final
 
 echo "======== PROCESSING foraIrSer-2.final ========="
-grep '^ir\s' foraIrSer-2.out | sed 's/fora/ir/g'   | sed 's/^ir\s*//'  | sed '/\<ir\>.*\<ir\>/d' > foraIrSer-2.final
-grep '^ser\s' foraIrSer-2.out | sed 's/fora/ser/g' | sed 's/^ser\s*//' | sed '/\<ser\>.*\<ser\>/d' >> foraIrSer-2.final
+grep '^ir\s' foraAnotado.out | sed 's/fora/ir/g'   | sed 's/^ir\s*//'  | sed '/\<ir\>.*\<ir\>/d' > foraAnotado.final
+grep '^ser\s' foraAnotado.out | sed 's/fora/ser/g' | sed 's/^ser\s*//' | sed '/\<ser\>.*\<ser\>/d' >> foraAnotado.final
+
+#echo "========== Adding <s> </s> characters ========="
+#sed -i -e 's/^/<s> /' -e 's/$/ <\/s>/' virAnotado.final
+#sed -i -e 's/^/<s> /' -e 's/$/ <\/s>/' foraAnotado.final
 
 echo "======= GENERATING UNIGRAMS AND BIGRAMS ======="
 python unigramsAndBigrams.py

@@ -45,6 +45,8 @@ def readSentences(sentences_file):
     with codecs.open(sentences_file, "r", encoding='utf-8') as file:
         raw = (file.readlines())
     file.close()
+    for i in xrange(len(raw)):
+        raw[i] = raw[i].lower()
     return raw
 
 def analyseSentence(sent, unigrams_dict, bigrams_dict, ambiguity, sentences, smoothing):
@@ -58,22 +60,37 @@ def analyseSentence(sent, unigrams_dict, bigrams_dict, ambiguity, sentences, smo
         if combination in bigrams_dict:
             bigrams_values.append(bigrams_dict[combination])
         else:
+            bigrams_dict.update({combination:0})
             bigrams_values.append(0)
 
+    #In case the adjacent word is not present in corpus
+    for word in [words[index_ambiguity-1] , words[index_ambiguity+1]]:
+        if word not in unigrams_dict:
+            unigrams_dict.update({word:0})
+            print "Word \"" + word.encode('UTF-8') + "\" added to corpus"
+
+    #Calculating probability for first option
     numerator_1_1 = bigrams_values[0] + smoothing
     denominator_1_1 = unigrams_dict[words[index_ambiguity-1]] + (smoothing * len(unigrams_dict))
 
     numerator_1_2 = bigrams_values[1] + smoothing
     denominator_1_2 = unigrams_dict[ambiguity[1]] + (smoothing * len(unigrams_dict))
 
+    first_option_value = 0
+    if denominator_1_1*denominator_1_2 != 0:
+        first_option_value = float(float(numerator_1_1)/float(denominator_1_1)) * float(float(numerator_1_2)/float(denominator_1_2))
+
+    #Calculating probability for second option
     numerator_2_1 = bigrams_values[2] + smoothing
     denominator_2_1 = unigrams_dict[words[index_ambiguity-1]] + (smoothing * len(unigrams_dict))
 
     numerator_2_2 = bigrams_values[3] + smoothing
     denominator_2_2 = unigrams_dict[ambiguity[2]] + (smoothing * len(unigrams_dict))
 
-    first_option_value = float(float(numerator_1_1)/float(denominator_1_1)) * float(float(numerator_1_2)/float(denominator_1_2))
-    second_option_value = float(float(numerator_2_1)/float(denominator_2_1)) * float(float(numerator_2_2)/float(denominator_2_2))
+
+    second_option_value = 0
+    if denominator_2_1*denominator_2_2 != 0:
+        second_option_value = float(float(numerator_2_1)/float(denominator_2_1)) * float(float(numerator_2_2)/float(denominator_2_2))
 
 
     print "Probability option to be \"" + (ambiguity[1]).encode("UTF-8") + "\": " + str(first_option_value)
