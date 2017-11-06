@@ -5,8 +5,8 @@
 #	$ ./run.sh
 
 # Grupo 40:
-# Sofia Aparício - nº 81105
-# Rodrigo Lousada - nº 81115
+# Sofia Aparicio - n 81105
+# Rodrigo Lousada - n 81115
 
 clear
 
