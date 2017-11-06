@@ -76,7 +76,7 @@ def analyseSentence(sent, unigrams_dict, bigrams_dict, ambiguity, sentences, smo
     numerator_1_2 = bigrams_values[1] + smoothing
     denominator_1_2 = unigrams_dict[ambiguity[1]] + (smoothing * len(unigrams_dict))
 
-    first_option_value = 0
+    first_option_value = float(0)
     if denominator_1_1*denominator_1_2 != 0:
         first_option_value = float(float(numerator_1_1)/float(denominator_1_1)) * float(float(numerator_1_2)/float(denominator_1_2))
 
@@ -88,7 +88,7 @@ def analyseSentence(sent, unigrams_dict, bigrams_dict, ambiguity, sentences, smo
     denominator_2_2 = unigrams_dict[ambiguity[2]] + (smoothing * len(unigrams_dict))
 
 
-    second_option_value = 0
+    second_option_value = float(0)
     if denominator_2_1*denominator_2_2 != 0:
         second_option_value = float(float(numerator_2_1)/float(denominator_2_1)) * float(float(numerator_2_2)/float(denominator_2_2))
 
@@ -130,6 +130,6 @@ if __name__ == '__main__':
     sentences = readSentences(sentences_file)
 
     for sent in sentences:
-        print "Sentence nr." + str(sentences.index(sent) + 1 )
+        print "Sentence nr." + str(sentences.index(sent) + 1) + ": " + sent[:-1].encode("UTF-8")
         result = analyseSentence(sent, unigrams_dict, bigrams_dict, ambiguity, sentences, smoothing)
-        print "Result: " + str(result)
+        print "Result: " + str(result) + "\n"
