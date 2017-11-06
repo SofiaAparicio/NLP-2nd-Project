@@ -1,0 +1,11 @@
+Grupo 40:
+ - Sofia Aparício - nº 81105
+ - Rodrigo Lousada - nº 81115
+
+Viabilidade:
+
+	A viabilidade começa inicialmente a ser posta em causa com a possibilidade do anotador ter cometido um erro ao anotar uma das mais de mil frases dadas.
+	O corpus criado para as duas frases apresenta diversas fragilidades, nomeadamente o número de ocorrências dos lemas ir(para fora) e ver(para vir) é demasiado escasso, isto quer dizer que calculando a probabilidade através da frequência irá ser, na maioria dos casos, superior nos lemas ser(para fora) e vir(para vir). Seria então necessário um corpus muito maior, com diversas ocorrências de todos os lemas, para analisar uma frase que nos viesse à cabeça. Neste caso, o alisamento auxilia a tarefa, facilitando a atribuição de probabilidades não nulas a cada lema.
+	Com a utilização do alisamento de Laplace comprovamos que este não é o melhor método uma vez que possui uma abordagem demasiado "agressiva" acabando por adulterar alguns resultados. Isto é comprovado pelo caso da 2ª frase do ficheiro virFrases.txt que sem alisamento teria o lema vir com probabilidade nula e o lema ver com uma probabilidade baixa, atribuindo então o resultado certo. Após o alisamento o segundo lema (anteriormente a 0) passa a ter uma probabilidade superior à do primeiro, atribuindo o lema vir incorretamente.
+	Quando analisamos as frases, podemos ver que os lemas escolhidos não são os mais correctos em todas em frases, algo que já se esperava dados o tamanho do corpus.
+Este método também não tem em conta o contexto, sendo apenas uma probabilidade relativa às palavras adjacentes, sendo muitas vezes uma informação ineficiente.

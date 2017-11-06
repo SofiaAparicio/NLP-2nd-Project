@@ -4,6 +4,10 @@
 #	$ chmod u+x run.sh
 #	$ ./run.sh
 
+# Grupo 40:
+# Sofia Aparício - nº 81105
+# Rodrigo Lousada - nº 81115
+
 clear
 
 echo "======== PROCESSING virVerVir-1.final ========="
