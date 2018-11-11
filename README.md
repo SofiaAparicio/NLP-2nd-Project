@@ -8,7 +8,6 @@ Natural Language Processing 2nd Mini Project
 Options taken while developing 2nd mini project
 
 ### Python files:
+- There are 2 python files, one is responsible for the creation of the bigrams and unigrams, while the other is responsible for reading the txt files and showing the most probable lemma in each sentence.
 
-- There are 2 python fyles, one is responsible for the creation of the bigrams and unigrams, while the other is responsible for reading the txt files and showing the most probable lemma in each sentence.
-
-- While running the analyse.py on shell, beyond the input files, we can give it the string “use-smoothing” so it applies the Laplace smoothing in the probabilities calculum.
+- While running the analyse.py on shell, beyond the input files, we can give it the string “use-smoothing” so it applies the Laplace smoothing in the probabilities calculus.
