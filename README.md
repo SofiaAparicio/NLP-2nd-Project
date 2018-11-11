@@ -1,2 +1,48 @@
 # NLP-2nd-Mini-Project
 Natural Language Processing 2nd Mini Project
+
+### Group 40:
+ - Sofia Aparicio - nº 81105
+ - Rodrigo Lousada - nº 81115
+
+Options taken while developing 2nd mini project
+
+### General:
+
+- Os ficheiros .out  e .final ficaram como pedido nos requisitos de submissão do enunciado.
+
+- Optou-se por escolher ficheiros com a terminação “txt” em detrimento dos “arpa”.
+
+
+
+### Text processing:
+
+- Uma vez que o professor não tinha /s na demo, optamos por não os colocar no principio nem fim de linha. De forma a não existir contagem de bigramas com palavras do fim de uma frase e inicio de outra, as contagens dos bigramas é feita linha a linha.
+
+- A pontuação não foi retirada com a finalidade de otimizar a análise, permitindo determinar que por exemplo: no caso em que verificamos o digrama (“for”, “,”) a probabilidade do lema ser “ser” é maior, visto que o “ir” requer maioritariamente um complemento.
+
+
+
+### Probabilities calculum:
+
+- Efetuou-se o Laplace Smoothing por ser um método mais fácil e simples de aplicar.
+
+- No caso em que as probabilidades têm o mesmo valor, optou-se por escolher o lema que tenha a maior contagens de ungiramas.
+
+- Quanto ao cálculo dos bigramas das frases que sejam para analisar, são multiplicadas as probabilidades do bigrama correspondente às palavras que se encontram antes e depois dos verbos a analisar, pois o resto das probabilidades acabariam por ter o mesmo valor em ambos os casos.
+
+- O alisamento é feito apenas quando estamos efectivamente a calcular as probabilidades, de forma a melhorar o desempenho e tempos do nosso script.
+
+ 
+
+
+### Python files:
+
+- Há dois ficheiros python, um responsável por criar os bigramas e unigramas, enquanto o outro serve para ler os ficheiros e indicar qual o lema mais provável para cada uma das frases. O segundo ficheiro recebe ficheiros txt e calcula o lema mais provável para cada uma das frases.
+
+- Ao correr o analyse.py para além dos ficheiros pedidos como input, pode ou não, receber a string “use-smoothing” de forma a aplicar o Laplace smoothing no cálculo das probabilidades.
+ 
+
+ 
+
+As frases foram escolhidas de forma a conter diversos casos que permitissem uma melhor análise da viabilidade. Escolhemos tanto frases que tivessem todas as palavras pertencentes ao corpus, como frases que não. O método para estas foi adicionar a palavra ao corpus com probabilidade zero, apenas até ao fim da análise dessa mesma frase.
