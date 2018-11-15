@@ -5,7 +5,7 @@ Natural Language Processing 2nd Mini Project
  - Sofia Aparicio - nº 81105
  - Rodrigo Lousada - nº 81115
 
-**Grade:** 3,5/4
+**Grade:** 3,8/4
 
 Options taken while developing 2nd mini project
 
